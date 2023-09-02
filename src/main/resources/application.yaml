@@ -1,0 +1,27 @@
+spring:
+  profiles:
+    active: dev
+  application:
+    name: account-service
+  cloud:
+    config:
+      uri: http://localhost:8888/
+      label: develop
+  config:
+    import: optional:configserver:http://localhost:8888/
+  jpa:
+    properties:
+      jakarta.persistence.validation.mode: none
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka
+  instance:
+    preferIpAddress: true
+
+server:
+  port: 8000
+  #servlet:
+  #  context-path: /book-service
+
+# localhost:8888/book-service/dev/Sardor
