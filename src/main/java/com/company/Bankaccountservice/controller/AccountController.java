@@ -3,7 +3,9 @@ package com.company.Bankaccountservice.controller;
 
 import com.company.Bankaccountservice.dto.AccountDto;
 import com.company.Bankaccountservice.dto.ResponseDto;
+import com.company.Bankaccountservice.dto.TransactionDto;
 import com.company.Bankaccountservice.service.AccountService;
+import com.company.Bankaccountservice.service.TransactionService;
 import com.company.Bankaccountservice.util.SimpleCrud;
 import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
 import io.swagger.v3.oas.annotations.Operation;
@@ -29,6 +31,7 @@ import java.util.Set;
 @RateLimiter(name = "first-rate-limiter", fallbackMethod = "fallBack")
 public class AccountController implements SimpleCrud<Integer, AccountDto> {
     private final AccountService accountService;
+    private final TransactionService transactionService;
 
     @PostMapping("/create")
     @Override
@@ -78,6 +81,11 @@ public class AccountController implements SimpleCrud<Integer, AccountDto> {
     @GetMapping("/get-by-branch/{id}")
     public ResponseDto<Set<AccountDto>> getAccountByBranch(@PathVariable Integer id) {
         return this.accountService.getAccountByBranch(id);
+    }
+
+    @GetMapping("/get-by-customer/{id}")
+    public ResponseDto<TransactionDto> getByCustomer(@PathVariable(value = "id") Integer id) {
+        return this.transactionService.getByCustomer(id);
     }
 
     @PutMapping("/update/{id}")

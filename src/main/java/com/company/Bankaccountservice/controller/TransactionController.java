@@ -60,16 +60,6 @@ public class TransactionController implements SimpleCrud<Integer, TransactionDto
     public ResponseDto<TransactionDto> getWithAccount(@PathVariable(value = "id") Integer id) {
         return this.transactionService.getWithAccount(id);
     }
-    @Operation(
-            tags = "Get",
-            summary = "Your summary get by customer method!",
-            description = "This is method for get transaction!"
-    )
-    @GetMapping("/get-by-customer/{id}")
-    public ResponseDto<TransactionDto> getByCustomer(@PathVariable(value = "id") Integer id){
-        return this.transactionService.getByCustomer(id);
-    }
-
     @PutMapping("/update/{id}")
     @Override
     @Operation(
